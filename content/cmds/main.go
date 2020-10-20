@@ -18,7 +18,7 @@ import (
 var server *http.Server
 
 func main() {
-
+	handlers.LoadPlugin()
 	// 一个通知退出的chan
 	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)

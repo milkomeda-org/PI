@@ -18,7 +18,7 @@ func Handle(ctx context.Context, content *content.Content) {
 }
 
 func LoadPlugin() {
-	plu, err := plugin.Open("../plugins/plugin.so")
+	plu, err := plugin.Open("../plugins/hello.so")
 	if err != nil {
 		panic(err)
 	}
