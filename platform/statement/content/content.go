@@ -3,6 +3,8 @@
 
 package content
 
+import "net/http"
+
 // Content Runtime data
 type Content interface {
 	ContentType() string
@@ -10,7 +12,8 @@ type Content interface {
 
 // HTTPContent http data content
 type HTTPContent struct {
-
+	W http.ResponseWriter
+	R *http.Request
 }
 
 func (h *HTTPContent) ContentType() string {
@@ -19,7 +22,6 @@ func (h *HTTPContent) ContentType() string {
 
 // TCPContent tcp data content
 type TCPContent struct {
-
 }
 
 func (t *TCPContent) ContentType() string {
