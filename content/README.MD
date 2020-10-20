@@ -12,3 +12,5 @@ pi.content(cms)
 插件形式：服务类，函数类
 插入点：after received, before sending
 插件接口：process
+
+可执行目录

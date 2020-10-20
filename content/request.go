@@ -3,7 +3,9 @@
 
 package content
 
+import content2 "pi/platform/statement/content"
+
 // Request Runtime request
 type Request struct {
-	content *Content
+	content *content2.Content
 }
