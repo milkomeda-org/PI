@@ -55,8 +55,6 @@ func main() {
 }
 
 func hand(w http.ResponseWriter, r *http.Request) {
-	var v = interface{}(content.HTTPContent{W: w, R: r})
-	if c, ok := v.(content.Content); ok {
-		handlers.Handle(context.Background(), &c)
-	}
+	var v = content.HTTPContent{W: w, R: r}
+	handlers.Handle(context.Background(), &v)
 }

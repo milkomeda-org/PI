@@ -4,30 +4,41 @@
 package handlers
 
 import (
+	"bytes"
 	"context"
-	"pi/platform/statement/content"
+	"fmt"
+	con "pi/platform/statement/content"
 	"plugin"
 )
 
-var processor []content.Processor
+var processor []interface{}
 
-func Handle(ctx context.Context, content *content.Content) {
+func Handle(ctx context.Context, content *con.HTTPContent) {
 	for _, c := range processor {
-		c.Process(ctx, content)
+		if v, ok := c.(con.RenderingPlugin); ok {
+			r, _ := v.Render("123")
+			_, _ = content.W.Write(bytes.NewBufferString(r).Bytes())
+		}
 	}
 }
 
 func LoadPlugin() {
-	plu, err := plugin.Open("../plugins/hello.so")
+	plu, err := plugin.Open("/home/vinson/go/src/PI/content/plugins/smartmd/render_smartmd.so")
 	if err != nil {
 		panic(err)
 	}
-	P, err := plu.Lookup("P")
+	instance, err := plu.Lookup("Instance")
 	if err != nil {
 		panic(err)
 	}
-	if m, ok := P.(content.Processor); ok {
-		processor = append(processor, m)
+	if f, ok := instance.(func() interface{}); ok {
+		if p, ok := f().(con.Plugin); ok {
+			processor = append(processor, p)
+		} else {
+			fmt.Println("plugin instance return type invalid")
+		}
+	} else {
+		fmt.Println("plugin instance execute error")
 	}
 
 }

@@ -1,5 +1,6 @@
 pi.content(cms)
 提供核心内容管理服务
+提供离线管理和在线管理
 
 核心处理链:receive,send
 原始数据流:content

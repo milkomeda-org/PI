@@ -3,9 +3,14 @@
 
 package content
 
-import "context"
+// Plugin plugin interface
+type Plugin interface {
+	Name() string
+	Type() string
+}
 
-// Processor Data processor
-type Processor interface {
-	Process(context context.Context, content *Content) interface{}
+// RenderingPlugin content rendering
+type RenderingPlugin interface {
+	// this function should return rendered
+	Render(src string) (string, error)
 }
