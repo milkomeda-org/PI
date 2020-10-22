@@ -9,8 +9,8 @@ type Plugin interface {
 	Type() string
 }
 
-// RenderingPlugin content rendering
-type RenderingPlugin interface {
+// Render content rendering
+type Render interface {
 	// this function should return rendered
-	Render(src string) (string, error)
+	Rend(src string) (string, error)
 }

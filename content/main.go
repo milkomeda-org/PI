@@ -4,13 +4,11 @@
 package main
 
 import (
-	"context"
+	"bytes"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
-	"pi/content/handlers"
-	"pi/platform/statement/content"
 	"time"
 )
 
@@ -18,7 +16,6 @@ import (
 var server *http.Server
 
 func main() {
-	handlers.LoadPlugin()
 	// 一个通知退出的chan
 	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
@@ -27,7 +24,7 @@ func main() {
 	mux.HandleFunc("/", hand)
 
 	server = &http.Server{
-		Addr:         ":1111",
+		Addr:         ":" + os.Getenv("PORT"),
 		WriteTimeout: time.Second * 4,
 		Handler:      mux,
 	}
@@ -55,6 +52,5 @@ func main() {
 }
 
 func hand(w http.ResponseWriter, r *http.Request) {
-	var v = content.HTTPContent{W: w, R: r}
-	handlers.Handle(context.Background(), &v)
+	w.Write(bytes.NewBufferString("hello pi").Bytes())
 }

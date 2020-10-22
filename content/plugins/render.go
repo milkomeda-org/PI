@@ -3,7 +3,7 @@ package main
 type SmartMD struct {
 }
 
-func (s SmartMD) Render(src string) (string, error) {
+func (s SmartMD) Rend(src string) (string, error) {
 	src += "\n 已渲染"
 	return src, nil
 }
