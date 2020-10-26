@@ -48,9 +48,7 @@ func main() {
 		}
 	}
 	log.Fatal("Server exited")
-
 }
-
 func hand(w http.ResponseWriter, r *http.Request) {
 	w.Write(bytes.NewBufferString("hello pi").Bytes())
 }
