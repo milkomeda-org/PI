@@ -8,7 +8,7 @@ test_job:
   stage: test
   image: golang:1.15
   tags:
-    - demo-project-runner
+    - my-tag
   # 执行脚本前的工作，设置 goproxy 加快依赖下载速度
   before_script:
     - go env -w GO111MODULE=on
