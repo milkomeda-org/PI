@@ -28,4 +28,4 @@ build:
     - go env -w GO111MODULE=on
     - go env -w GOPROXY=https://goproxy.cn,direct
   script:
-    - go build app ./content/main.go
+    - go build -o app ./content/main.go
