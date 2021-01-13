@@ -4,7 +4,7 @@ stages:
   - build
 
 # 测试作业
-test_job:
+test:
   stage: test
   image: golang:1.15
   tags:
@@ -15,6 +15,13 @@ test_job:
     - go env -w GOPROXY=https://goproxy.cn,direct
   # 执行代码检查和单元测试
   script:
-    - ls -l
     - go vet ./...
     - go test -v -race ./...
+
+# 编译阶段
+build:
+  stage: build
+  tags:
+    - my-tag
+  script:
+    - go build app ./content/main.go
