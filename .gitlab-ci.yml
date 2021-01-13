@@ -21,7 +21,11 @@ test:
 # 编译阶段
 build:
   stage: build
+  image: golang:1.15
   tags:
     - my-tag
+  before_script:
+    - go env -w GO111MODULE=on
+    - go env -w GOPROXY=https://goproxy.cn,direct
   script:
     - go build app ./content/main.go
