@@ -1,0 +1,19 @@
+# 流水线分为测试阶段和构建阶段
+stages:
+  - test
+  - build
+
+# 测试作业
+test_job:
+  stage: test
+  image: golang:1.15
+  tags:
+    - demo-project-runner
+  # 执行脚本前的工作，设置 goproxy 加快依赖下载速度
+  before_script:
+    - go env -w GO111MODULE=on
+    - go env -w GOPROXY=https://goproxy.cn,direct
+  # 执行代码检查和单元测试
+  script:
+    - go vet ./...
+    - go test -v -race ./...
