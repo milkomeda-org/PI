@@ -15,5 +15,6 @@ test_job:
     - go env -w GOPROXY=https://goproxy.cn,direct
   # 执行代码检查和单元测试
   script:
+    - ls -l
     - go vet ./...
     - go test -v -race ./...
